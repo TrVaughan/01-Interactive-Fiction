@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys,os,json
+import sys,os,json,re
 assert sys.version_info >= (3,9), "This script requires at least Python 3.9"
 
 def load(l):
@@ -33,17 +33,17 @@ def update():
     pass
 
 def render(current):
-    print(current("name"))
-    print(current("text"))
+    print(current["name"])
+    print(format_passage(current["text"]))
 
 
 def get_imput():
-    choice = imput("What would you like to do? ")
+    choice = input("What would you like to do? ")
     return choice
 
 def main():
-    game_desc = load("game.jason")
-    current = find.passage(game_desc, game_desc["startnode"])
+    game_desc = load("game.json")
+    current = find_passage(game_desc, game_desc["startnode"])
     choice = ""
     while choice != "quit" and current != {}:
         update()
