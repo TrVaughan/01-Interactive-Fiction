@@ -29,15 +29,22 @@ def format_passage(description):
     description = re.sub(r'\[\[(.+?)\]\]',r'[ \1 ]',description)
     return description
 
-def update():
-    pass
+def update(current,choice,game_desc):
+    if choice == "":
+        return current 
+    for l in current["links"]:
+        if l["name"] == choice:
+            current = find_passage(game_desc, l["pid"])
+            return current 
+    print("I don't think that is a choice, try again!")
+    return current 
 
 def render(current):
     print(current["name"])
     print(format_passage(current["text"]))
 
 
-def get_imput():
+def get_input():
     choice = input("What would you like to do? ")
     return choice
 
@@ -46,7 +53,7 @@ def main():
     current = find_passage(game_desc, game_desc["startnode"])
     choice = ""
     while choice != "quit" and current != {}:
-        update()
+        current = update(current,choice,game_desc)
         render(current)
         choice = get_input()
 
