@@ -48,7 +48,7 @@ def main():
     while choice != "quit" and current != {}:
         update()
         render(current)
-        choice = get_imput()
+        choice = get_input()
 
 
 print("Thanks for playing!")
